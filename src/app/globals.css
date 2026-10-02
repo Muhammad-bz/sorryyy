@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --petal: #f4b6a6; }
+html, body { background: #0b0a14; color: #fff; -webkit-tap-highlight-color: transparent; }
+
+.bg-layer { position: fixed; inset: 0; z-index: -1; transition: opacity 2s ease; background-size: 200% 200%; animation: drift 24s ease-in-out infinite; }
+@keyframes drift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+.fade-up { opacity: 0; animation: fadeUp 1s ease forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.petal { position: fixed; bottom: -30px; z-index: 0; border-radius: 80% 0 80% 0; background: var(--petal); opacity: 0; pointer-events: none; animation: petalUp linear infinite; }
+@keyframes petalUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: .5; }
+  90% { opacity: .25; }
+  100% { transform: translateY(-115vh) translateX(40px) rotate(300deg); opacity: 0; }
+}
+
+.glass { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.btn { transition: transform .2s ease, background .3s ease; }
+.btn:active { transform: scale(.95); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .petal { display: none; }
+}
